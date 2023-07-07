@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Weather Data</title>
+    <script>
+      function fetchWeatherData() {
+        var country = document.getElementById("country-input").value;
+        if (country.trim() === "") {
+          alert("Please enter a country or city name");
+          return;
+        }
+        var url = "/weather/fetch-weather/" + country;
+        window.location.href = url;
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Weather Data</h1>
+    <label for="country-input">Country:</label>
+    <input type="text" id="country-input" name="country" />
+    <button onclick="fetchWeatherData()">Fetch Weather</button>
+    <br />
+    <p>Invalid country or city name. Please try again.</p>
+    <p>
+      <a href="/weather/fetch-weather/germany">Germany</a>
+      <a href="/weather/fetch-weather/australia">Australia</a>
+      <a href="/weather/fetch-weather/india">India</a>
+      <a href="/weather/fetch-weather/usa">USA</a>
+      <a href="/weather/fetch-weather/uk">UK</a>
+    </p>
+  </body>
+</html>
