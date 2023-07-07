@@ -1,0 +1,55 @@
+<!-- {% load static tailwind_tags %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Weather Data</title>
+    <script>
+      function fetchWeatherData() {
+        var country = document.getElementById("country-input").value;
+        if (country.trim() === "") {
+          alert("Please enter a country or city name");
+          return;
+        }
+        var url = "/weather/fetch-weather/" + country;
+        window.location.href = url;
+      }
+    </script>
+    {% tailwind_css %}
+  </head>
+  <body>
+    <h1>Weather Data</h1>
+    <label for="country-input">Country:</label>
+    <input type="text" id="country-input" name="country" />
+    <button onclick="fetchWeatherData()">Fetch Weather</button>
+    <br />
+    <p class=" text-blue-600 text-6xl">Invalid country or city name. Please try again.</p>
+    <p>
+      <a href="/weather/fetch-weather/germany">Germany</a>
+      <a href="/weather/fetch-weather/australia">Australia</a>
+      <a href="/weather/fetch-weather/india">India</a>
+      <a href="/weather/fetch-weather/usa">USA</a>
+      <a href="/weather/fetch-weather/uk">UK</a>
+    </p>
+  </body>
+</html> -->
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Django Tailwind</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  {% tailwind_css %}
+</head>
+
+<body class="bg-gray-50 font-serif leading-normal tracking-normal">
+  <div class="container mx-auto">
+    <section class="flex items-center justify-center h-screen">
+      <h1 class="text-5xl">Django + Tailwind = ❤️</h1>
+    </section>
+  </div>
+</body>
+
+</html>
