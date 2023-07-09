@@ -1,32 +1,69 @@
+{% load static tailwind_tags %}
 <!DOCTYPE html>
 <html>
   <head>
     <title>Weather Data</title>
     <script>
-      function fetchWeatherData() {
-        var country = document.getElementById("country-input").value;
-        if (country.trim() === "") {
-          alert("Please enter a country or city name");
-          return;
+
+      document.addEventListener("DOMContentLoaded", function () {
+        function fetchWeatherData() {
+          var country = document.getElementById("country-input").value;
+          if (country.trim() === "") {
+            alert("Please enter a country or city name");
+            return;
+          }
+          var url = "/weather/fetch-weather/" + country;
+          window.location.href = url;
         }
-        var url = "/weather/fetch-weather/" + country;
-        window.location.href = url;
-      }
+
+        function handleKeyPress(event) {
+          if (event.keyCode === 13) {
+            event.preventDefault();
+            fetchWeatherData();
+          }
+        }
+
+        document
+          .getElementById("country-input")
+          .addEventListener("keypress", handleKeyPress);
+
+        const button = document.getElementById("fetch-weather-button");
+        button.addEventListener("click", fetchWeatherData);
+      });
+
+      {% comment %} fetch weather by button pressed {% endcomment %}
     </script>
+    {% tailwind_css %}
   </head>
-  <body>
-    <h1>Weather Data</h1>
-    <label for="country-input">Country:</label>
-    <input type="text" id="country-input" name="country" />
-    <button onclick="fetchWeatherData()">Fetch Weather</button>
-    <br />
-    <p class:' text-red-200'>Invalid country or city name. Please try again.</p>
-    <p>
-      <a href="/weather/fetch-weather/germany">Germany</a>
-      <a href="/weather/fetch-weather/australia">Australia</a>
-      <a href="/weather/fetch-weather/india">India</a>
-      <a href="/weather/fetch-weather/usa">USA</a>
-      <a href="/weather/fetch-weather/uk">UK</a>
-    </p>
+  <body class="justify-center">
+    <div class="min-h-screen flex items-center justify-center">
+      <div
+        class="flex flex-col bg-white rounded p-4 w-full max-w-xs border-2 shadow-lg"
+      >
+        <form class="w-full max-w-sm">
+          <div class="flex items-center border-b border-teal-500 py-2">
+            <input
+              class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+              type="text"
+              placeholder="City, or Country name"
+              aria-label="Full name"
+              id="country-input"
+            />
+            <button
+              class="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded"
+              type="button"
+              onclick="fetchWeatherByButton()"
+              id="fetch-weather-button"
+            >
+              Search
+            </button>
+          </div>
+        </form>
+
+        <div class="font-bold text-xl">
+          Invalid country or city name. Please try again.
+        </div>
+      </div>
+    </div>
   </body>
 </html>

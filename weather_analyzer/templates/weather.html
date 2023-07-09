@@ -1,59 +1,133 @@
+{% load static tailwind_tags %}
 <!DOCTYPE html>
 <html>
   <head>
     <title>Weather Data</title>
     <script>
-      function fetchWeatherData() {
-        var country = document.getElementById("country-input").value;
-        if (country.trim() === "") {
-          alert("Please enter a country or city name");
-          return;
+      document.addEventListener("DOMContentLoaded", function () {
+        function fetchWeatherData() {
+          var country = document.getElementById("country-input").value;
+          if (country.trim() === "") {
+            alert("Please enter a country or city name");
+            return;
+          }
+          var url = "/weather/fetch-weather/" + country;
+          window.location.href = url;
         }
-        var url = "/weather/fetch-weather/" + country;
-        window.location.href = url;
-      }
-    </script>
-  </head>
-  <body>
-    <h1>Weather Data</h1>
-    <label for="country-input">Country:</label>
-    <input type="text" id="country-input" name="country" />
-    <button onclick="fetchWeatherData()">Fetch Weather</button>
 
-    {% if weather_data %}
-    <h2>{{ weather_data.city }}, {{ weather_data.region }}</h2>
-    <p>Country: {{ weather_data.country }}</p>
-    <p>
-      Temperature: {{ weather_data.temperature_c }}°C / {{
-      weather_data.temperature_f }}°F
-    </p>
-    <p>Is Day: {% if weather_data.is_day %}Yes{% else %}No{% endif %}</p>
-    <p>Condition: {{ weather_data.condition_text }}</p>
-    <img src="{{ weather_data.condition_icon }}" alt="Weather Icon" />
-    <p>Wind Speed: {{ weather_data.wind_kph }} km/h</p>
-    <p>Wind Degree: {{ weather_data.wind_degree }}°</p>
-    <p>Wind Direction: {{ weather_data.wind_dir }}</p>
-    <p>
-      Pressure: {{ weather_data.pressure_mb }} mb / {{ weather_data.pressure_in
-      }} in
-    </p>
-    <p>
-      Precipitation: {{ weather_data.precip_mm }} mm / {{ weather_data.precip_in
-      }} in
-    </p>
-    <p>Humidity: {{ weather_data.humidity }}%</p>
-    <p>Cloud Cover: {{ weather_data.cloud }}</p>
-    <p>
-      Feels Like: {{ weather_data.feelslike_c }}°C / {{ weather_data.feelslike_f
-      }}°F
-    </p>
-    <p>
-      Visibility: {{ weather_data.visibility_km }} km / {{
-      weather_data.visibility_miles }} miles
-    </p>
-    <p>UV Index: {{ weather_data.uv }}</p>
-    <p>Gust Speed: {{ weather_data.gust_kph }} km/h</p>
-    <p>Last Updated: {{ weather_data.last_updated }}</p>
-    {% endif %}
+        function handleKeyPress(event) {
+          if (event.keyCode === 13) {
+            event.preventDefault();
+            fetchWeatherData();
+          }
+        }
+
+        document
+          .getElementById("country-input")
+          .addEventListener("keypress", handleKeyPress);
+
+        const button = document.getElementById("fetch-weather-button");
+        button.addEventListener("click", fetchWeatherData);
+      });
+    </script>
+    {% tailwind_css %}
+  </head>
+  <body class="justify-center">
+    <div class="min-h-screen flex items-center justify-center">
+      <div
+        class="flex flex-col bg-white rounded p-4 w-full max-w-xs border-2 shadow-lg"
+      >
+        <form class="w-full max-w-sm">
+          <div class="flex items-center border-b border-teal-500 py-2">
+            <input
+              class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+              type="text"
+              placeholder="City, or Country name"
+              aria-label="Full name"
+              id="country-input"
+            />
+            <button
+              class="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded"
+              type="button"
+              onclick="fetchWeatherData()"
+              id="fetch-weather-button"
+            >
+              Search
+            </button>
+          </div>
+        </form>
+        {% if weather_data %}
+        <div class="font-bold text-xl">
+          {{ weather_data.city }}, {{ weather_data.region }},
+          {{weather_data.country}}
+        </div>
+        <div class="text-sm text-gray-500">{{weather_data.last_updated}}</div>
+        <div
+          class="mt-6 text-6xl self-center inline-flex items-center justify-center rounded-lg text-indigo-400 h-24 w-24"
+        >
+          <img
+            class="scale-150"
+            src="{{ weather_data.condition_icon }}"
+            alt="Weather Icon"
+          />
+        </div>
+        <div class="flex flex-row items-center justify-center mt-6">
+          <div class="font-medium text-6xl">
+            {{ weather_data.temperature_c }}°C
+          </div>
+          <div class="flex flex-col items-center ml-6">
+            <div>{{ weather_data.condition_text }}</div>
+            <div class="mt-1">
+              <span class="text-sm"><i class="far fa-long-arrow-up"></i></span>
+              <span class="text-sm font-light text-gray-500"></span>
+            </div>
+            <div>
+              <span class="text-sm"
+                ><i class="far fa-long-arrow-down"></i
+              ></span>
+              <span class="text-sm font-light text-gray-500"
+                >{{weather_data.}}</span
+              >
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-row justify-between mt-6">
+          <div class="flex flex-col items-center">
+            <div class="font-medium text-sm">Wind</div>
+            <div class="text-sm text-gray-500">
+              {{weather_data.wind_kph}}k/h
+            </div>
+          </div>
+          <div class="flex flex-col items-center">
+            <div class="font-medium text-sm">Humidity</div>
+            <div class="text-sm text-gray-500">{{weather_data.humidity}}%</div>
+          </div>
+          <div class="flex flex-col items-center">
+            <div class="font-medium text-sm">Visibility</div>
+            <div class="text-sm text-gray-500">
+              {{weather_data.visibility_km}}km
+            </div>
+          </div>
+        </div>
+        {% comment %} second row {% endcomment %}
+        <div class="flex flex-row justify-between mt-6">
+          <div class="flex flex-col items-center">
+            <div class="font-medium text-sm">UV Index</div>
+            <div class="text-sm text-gray-500">{{weather_data.uv}}</div>
+          </div>
+          <div class="flex flex-col items-center">
+            <div class="font-medium text-sm">Feels Like</div>
+            <div class="text-sm text-gray-500">
+              {{weather_data.feelslike_c}}°C
+            </div>
+          </div>
+          <div class="flex flex-col items-center">
+            <div class="font-medium text-sm">Cloud Cover</div>
+            <div class="text-sm text-gray-500">{{weather_data.cloud}}</div>
+          </div>
+        </div>
+        {% endif %}
+      </div>
+    </div>
   </body>
 </html>
