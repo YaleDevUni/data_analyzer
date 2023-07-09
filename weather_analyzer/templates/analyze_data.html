@@ -1,0 +1,111 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Data Analysis</title>
+    <link rel="stylesheet" href="{% static 'styles/nav.css' %}" />
+    <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  </head>
+
+  <body>
+    <nav>
+      <ul class="nav-container">
+        <li class="nav-item"><a href="{% url 'home'%}">Home</a></li>
+        <li class="nav-item">
+          <a href="/weather/fetch-weather/vancouver">Fetching</a>
+        </li>
+        <li class="nav-item">
+          <a href="/weather/visualize-data/">Visualization</a>
+        </li>
+        <li class="nav-item"><a href="/weather/analyze-data/">Analysis</a></li>
+      </ul>
+    </nav>
+    <p><b>Data Cleaning</b></p>
+    <div>
+      <p>
+        Handling missing values: <br />-Identify missing values: Use pandas
+        functions like isnull() or isna() to identify missing values in the
+        DataFrame. <br />-Remove missing values: Use dropna() to remove rows or
+        columns with missing values. <br />-Fill missing values:Use fillna() to
+        fill missing values with appropriate values, such as mean, median, or
+        mode. <br /><br />Handling Duplicates:<br />- Identify duplicates: Use
+        duplicated() to identify duplicate rows in the DataFrame.<br />- Remove
+        duplicates: Use drop_duplicates() to remove duplicate rows from the
+        DataFrame. <br /><br />Standardizing Data Formats:<br />- Convert data
+        types: Use astype() to convert data types of columns to the desired
+        format (e.g., converting strings to numbers, dates to datetime
+        objects).<br />- String cleaning: Use string manipulation functions like
+        strip(), lower(), upper(), or regular expressions (re) to clean and
+        standardize string values.<br /><br />
+        Addressing Inconsistencies and Errors: <br />-Data transformation: Use
+        functions like replace() or conditional statements to transform data
+        values that contain inconsistencies or errors. <br />-Outlier detection
+        and handling: Identify and handle outliers using statistical techniques
+        such as z-score or interquartile range (IQR).<br />- Error correction:
+        Correct data values based on domain knowledge or rules.
+      </p>
+    </div>
+    <pre class="prettyprint">
+    # Handling missing values
+    # It might inproper to fill missing values with 0 or mean
+    df.dropna()  # Remove rows with any missing value
+    df.fillna(value=0)  # Fill missing values with 0
+    df['temperature_c'].fillna(df['temperature_c'].mean(), inplace=True)  # Fill missing values with mean
+    df['uv'].fillna(df['uv'].mean(), inplace=True)  # Fill missing values with mean
+    # Handling duplicates
+    df.drop_duplicates()  # Remove duplicate rows</pre
+    >
+    <br /><br />
+    <p><b>Analyze Data</b></p>
+    <pre class="prettyprint">
+    # Calculate descriptive statistics
+    temperature_stats = df['temperature_c'].describe()
+    uv_stats = df['uv'].describe()
+    # Calculate correlation
+    correlation = df[['temperature_c', 'uv']].corr()
+
+    # Convert statistics to HTML tables
+    temperature_table = temperature_stats.to_frame(
+    ).transpose().to_html(index=False, classes='table')
+    uv_table = uv_stats.to_frame().transpose().to_html(index=False, classes='table')
+    correlation_table = correlation.to_html(classes='table')
+
+</pre
+    >
+    <p>output:</p>
+
+    <div>UV Index{{ uv_table|safe }}</div>
+    <div>Temperature{{ temperature_table|safe }}</div>
+    <div>Correlation{{ correlation_table|safe }}</div>
+
+    <p><b>Perform Null-Hypothesis</b></p>
+    <pre class="prettyprint">
+    from scipy.stats import pearsonr
+    # Calculate correlation
+    correlation = df[['temperature_c', 'uv']].corr()
+    correlation_coefficient = correlation.iloc[0, 1]
+
+    # Perform hypothesis test
+    correlation_test, p_value = pearsonr(df['temperature_c'], df['uv'])
+    alpha = 0.05
+    if p_value > alpha:
+        hypothesis_result = "Fail to reject the null hypothesis"
+    else:
+        hypothesis_result = "Reject the null hypothesis"
+    </pre>
+    <p>
+      The null hypothesis is that there is no relationship between the two
+      variables. The alternative hypothesis is that there is a relationship
+      between the two variables.
+      <br /><br />
+      alpha = 0.05
+      <br />
+      correlation_coefficient = {{correlation_coefficient}}
+      <br />
+      p_value = {{p_value}}
+      <br />
+      result = {{hypothesis_result}}
+      <br />
+    </p>
+  </body>
+</html>

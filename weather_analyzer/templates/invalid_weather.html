@@ -3,6 +3,7 @@
 <html>
   <head>
     <title>Weather Data</title>
+    <link rel="stylesheet" href="{% static 'styles/nav.css' %}" />
     <script>
 
       document.addEventListener("DOMContentLoaded", function () {
@@ -35,6 +36,18 @@
     </script>
     {% tailwind_css %}
   </head>
+  <nav>
+    <ul class="nav-container">
+      <li class="nav-item"><a href="{% url 'home'%}">Home</a></li>
+      <li class="nav-item">
+        <a href="/weather/fetch-weather/vancouver">Fetching</a>
+      </li>
+      <li class="nav-item">
+        <a href="/weather/visualize-data/">Visualization</a>
+      </li>
+      <li class="nav-item"><a href="/weather/analyze-data/">Analysis</a></li>
+    </ul>
+  </nav>
   <body class="justify-center">
     <div class="min-h-screen flex items-center justify-center">
       <div

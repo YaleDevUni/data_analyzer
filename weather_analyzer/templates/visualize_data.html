@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Data Visualization</title>
+    <link rel="stylesheet" href="{% static 'styles/nav.css' %}" />
+  </head>
+
+  <body>
+    <nav>
+      <ul class="nav-container">
+        <li class="nav-item"><a href="{% url 'home'%}">Home</a></li>
+        <li class="nav-item">
+          <a href="/weather/fetch-weather/vancouver">Fetching</a>
+        </li>
+        <li class="nav-item">
+          <a href="/weather/visualize-data/">Visualization</a>
+        </li>
+        <li class="nav-item"><a href="/weather/analyze-data/">Analysis</a></li>
+      </ul>
+    </nav>
+    <h1>Data Visualization</h1>
+    <img src="{% static 'images/plot.png' %}" alt="Temperature Variation" />
+    <h1>Optional Field</h1>
+    <div>{{optional_html_table|safe}}</div>
+    <h1>All field</h1>
+    <div>{{html_table|safe}}</div>
+  </body>
+</html>

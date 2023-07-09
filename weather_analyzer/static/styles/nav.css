@@ -1,0 +1,43 @@
+
+body {
+    margin: 0;
+}
+
+.nav-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: darkslategrey;
+    list-style-type: none;
+}
+
+.nav-item {
+    padding: 15px;
+    cursor: pointer;
+}
+
+.nav-item a {
+    text-align: center;
+    text-decoration: none;
+
+    color: white;
+}
+.nav-container {
+    top: 0;
+
+}
+
+li {
+    font-family: arial;
+}
+
+h1,div {
+    font-family: arial;
+    margin-left: 10px;
+}
+
+p {
+    margin-left: 10px;
+}
