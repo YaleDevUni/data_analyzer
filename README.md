@@ -14,7 +14,7 @@ Deployed web-site here: http://ec2-15-222-246-250.ca-central-1.compute.amazonaws
 
 1. Clone the repository:
 
-   git clone [https://github.com/your-username/weather-analysis.git](https://github.com/YaleDevUni/data_analyzer.git)
+   git clone 
 
 2. Create and activate a virtual environment:
 
