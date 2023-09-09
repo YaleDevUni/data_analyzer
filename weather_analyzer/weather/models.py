@@ -28,6 +28,6 @@ class Weather(models.Model):
     gust_mph = models.FloatField()
     gust_kph = models.FloatField()
     last_updated = models.DateTimeField(auto_now_add=True)
-
+    
     def __str__(self):
         return self.city
