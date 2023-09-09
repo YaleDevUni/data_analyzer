@@ -83,7 +83,7 @@ def fetch_weather_data(request, country):
 
 def visualize_data(request):
     # Fetch data from the database
-    weather_data = Weather.objects.all()
+    weather_data = Weather.objects.all().order_by('-last_updated')
 
     # Create a pandas DataFrame
     df = pd.DataFrame(list(weather_data.values()))
