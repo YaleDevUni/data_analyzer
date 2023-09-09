@@ -1,6 +1,7 @@
 # Data Analysis Project
 
 This is a Django project that fetches weather data from an API, visualizes the data, and performs data analysis on it.
+Deployed web-site here: http://ec2-15-222-246-250.ca-central-1.compute.amazonaws.com
 
 ## Features
 
@@ -13,7 +14,7 @@ This is a Django project that fetches weather data from an API, visualizes the d
 
 1. Clone the repository:
 
-   git clone https://github.com/your-username/weather-analysis.git
+   git clone 
 
 2. Create and activate a virtual environment:
 
