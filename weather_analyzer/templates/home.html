@@ -1,80 +1,156 @@
 {% load static tailwind_tags %}
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Weather</title>
-  <link rel="stylesheet" href="{% static 'styles/nav.css' %}">
-</head>
-{% tailwind_css %}
-<body>
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Weather</title>
+    <link rel="stylesheet" href="{% static 'styles/nav.css' %}" />
+  </head>
+  {% tailwind_css %}
+  <body>
     <nav>
-            <ul class="nav-container">
-                <li class="nav-item"> <a href="{% url 'home'%}">Home</a> </li>
-                <li class="nav-item"> <a href="/weather/fetch-weather/vancouver">Fetching</a> </li>
-                <li class="nav-item"> <a href="/weather/visualize-data/">Visualization</a> </li>
-                <li class="nav-item"> <a href="/weather/analyze-data/">Analysis</a> </li>
-            </ul>
-        </nav>
-  <div class="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
-    <!--Card 1-->
-    <a  href="/weather/fetch-weather/vancouver">
-    <div class="rounded overflow-hidden shadow-lg">
-      <img class="w-full" src="{% static 'images/Cloud.png' %}" alt="Mountain">
-      <div class="px-6 py-4">
-        <div class="font-bold text-xl mb-2">Fetch Weather Data</div>
-        <p class="text-gray-700 text-base">
-          <strong>Fetching Weather Data:</strong> Implemented a Django view function fetch_weather_data that retrieves weather data from the weather API based on a country. The data is fetched using the requests library, parsed, and saved to the database using the Weather model.
-<br /><br /><strong>Displaying Weather Data:</strong> Created the weather.html template that renders weather information such as location, temperature, wind, humidity, etc. The fetched weather data is passed to the template as weather_data using the render function in the fetch_weather_data view.
-</p>
-      </div>
-      <div class="px-6 pt-4 pb-2">
-        <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#fetch data</span>
-        <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#api</span>
-        <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#store data</span>
-      </div>
+      <ul class="nav-container">
+        <li class="nav-item"><a href="{% url 'home'%}">Home TEst</a></li>
+        <li class="nav-item">
+          <a href="/weather/fetch-weather/vancouver">Fetching</a>
+        </li>
+        <li class="nav-item">
+          <a href="/weather/visualize-data/">Visualization</a>
+        </li>
+        <li class="nav-item"><a href="/weather/analyze-data/">Analysis</a></li>
+      </ul>
+    </nav>
+    <div
+      class="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5"
+    >
+      <!--Card 1-->
+      <a href="/weather/fetch-weather/vancouver">
+        <div class="rounded overflow-hidden shadow-lg">
+          <img
+            class="w-full"
+            src="{% static 'images/Cloud.png' %}"
+            alt="Mountain"
+          />
+          <div class="px-6 py-4">
+            <div class="font-bold text-xl mb-2">Fetch Weather Data</div>
+            <p class="text-gray-700 text-base">
+              <strong>Fetching Weather Data:</strong> Implemented a Django view
+              function fetch_weather_data that retrieves weather data from the
+              weather API based on a country. The data is fetched using the
+              requests library, parsed, and saved to the database using the
+              Weather model. <br /><br /><strong
+                >Displaying Weather Data:</strong
+              >
+              Created the weather.html template that renders weather information
+              such as location, temperature, wind, humidity, etc. The fetched
+              weather data is passed to the template as weather_data using the
+              render function in the fetch_weather_data view.
+            </p>
+          </div>
+          <div class="px-6 pt-4 pb-2">
+            <span
+              class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
+              >#fetch data</span
+            >
+            <span
+              class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
+              >#api</span
+            >
+            <span
+              class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
+              >#store data</span
+            >
+          </div>
+        </div>
+      </a>
+      <!--Card 2-->
+      <a href="/weather/visualize-data/">
+        <div class="rounded overflow-hidden shadow-lg">
+          <img
+            class="w-full"
+            src="{% static 'images/Chart.jpg' %}"
+            alt="River"
+          />
+          <div class="px-6 py-4">
+            <div class="font-bold text-xl mb-2">Data Visualization</div>
+            <p class="text-gray-700 text-base">
+              <strong>Data Visualization:</strong>Have created a Django view
+              function visualize_data that fetches weather data from the
+              database using the Weather model. The data is then converted into
+              a pandas DataFrame for easy manipulation and visualization.
+              <br /><br /><strong>Plotting:</strong> Using Matplotlib, Have
+              plotted the relationship between temperature and UV index. The
+              temperature values are represented on the x-axis, and the UV index
+              values are represented on the y-axis. Each data point is
+              visualized as a scatter plot, with the color set to 'skyblue'.
+              Additionally, I have added a regression line to show the overall
+              trend in the data.
+            </p>
+          </div>
+          <div class="px-6 pt-4 pb-2">
+            <span
+              class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
+              >#plot data</span
+            >
+            <span
+              class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
+              >#pandas</span
+            >
+            <span
+              class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
+              >#matplotlib</span
+            >
+          </div>
+        </div>
+      </a>
+      <!--Card 3-->
+      <a href="/weather/analyze-data/">
+        <div class="rounded overflow-hidden shadow-lg">
+          <img
+            class="w-full"
+            src="{% static 'images/Analyze.jpg' %}"
+            alt="Forest"
+          />
+          <div class="px-6 py-4">
+            <div class="font-bold text-xl mb-2">
+              Real-time Data Analyze and Documentation
+            </div>
+            <p class="text-gray-700 text-base">
+              <strong>Correlation Analysis:</strong> Perform a correlation
+              analysis between the temperature (in Celsius) and the UV index
+              variables. The correlation coefficient is calculated using pandas,
+              indicating the strength and direction of the linear relationship
+              between the variables. The correlation result is presented in a
+              table format. <br /><br /><strong>Hypothesis Testing:</strong> Set
+              up the hypothesis for testing the correlation between temperature
+              and UV index. The null hypothesis assumes no correlation, while
+              the alternative hypothesis suggests a correlation. The hypothesis
+              test aims to provide evidence to either reject or fail to reject
+              the null hypothesis based on the calculated p-value.
+            </p>
+          </div>
+          <div class="px-6 pt-4 pb-2">
+            <span
+              class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
+              >#data retrieval</span
+            >
+            <span
+              class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
+              >#descriptive statistics</span
+            >
+            <span
+              class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
+              >#correlation analysis</span
+            >
+            <span
+              class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
+              >#hypothesis testing</span
+            >
+          </div>
+        </div>
+      </a>
     </div>
-    </a>
-    <!--Card 2-->
-    <a  href="/weather/visualize-data/">
-    <div class="rounded overflow-hidden shadow-lg">
-      <img class="w-full" src="{% static 'images/Chart.jpg' %}" alt="River">
-      <div class="px-6 py-4">
-        <div class="font-bold text-xl mb-2">Data Visualization</div>
-        <p class="text-gray-700 text-base">
-          <strong>Data Visualization:</strong>Have created a Django view function visualize_data that fetches weather data from the database using the Weather model. The data is then converted into a pandas DataFrame for easy manipulation and visualization.
-<br /><br /><strong>Plotting:</strong> Using Matplotlib, Have plotted the relationship between temperature and UV index. The temperature values are represented on the x-axis, and the UV index values are represented on the y-axis. Each data point is visualized as a scatter plot, with the color set to 'skyblue'. Additionally, I have added a regression line to show the overall trend in the data.</p>
-      </div>
-      <div class="px-6 pt-4 pb-2">
-        <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#plot data</span>
-        <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#pandas</span>
-        <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#matplotlib</span>
-      </div>
-    </div>
-    </a>
-    <!--Card 3-->
-    <a  href="/weather/analyze-data/">
-    <div class="rounded overflow-hidden shadow-lg">
-      <img class="w-full" src="{% static 'images/Analyze.jpg' %}" alt="Forest">
-      <div class="px-6 py-4">
-        <div class="font-bold text-xl mb-2">Real-time Data Analyze and Documentation</div>
-        <p class="text-gray-700 text-base">
-          <strong>Correlation Analysis:</strong> Perform a correlation analysis between the temperature (in Celsius) and the UV index variables. The correlation coefficient is calculated using pandas, indicating the strength and direction of the linear relationship between the variables. The correlation result is presented in a table format.
-        <br /><br /><strong>Hypothesis Testing:</strong> Set up the hypothesis for testing the correlation between temperature and UV index. The null hypothesis assumes no correlation, while the alternative hypothesis suggests a correlation. The hypothesis test aims to provide evidence to either reject or fail to reject the null hypothesis based on the calculated p-value.
-        </p>
-      </div>
-      <div class="px-6 pt-4 pb-2">
-        <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#data retrieval</span>
-        <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#descriptive statistics</span>
-        <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#correlation analysis</span>
-        <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#hypothesis testing</span>
-      </div>
-    </div>
-    </a>
-  </div>
-</div>
-
-</body>
+  </body>
 </html>
